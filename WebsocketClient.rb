@@ -5,14 +5,14 @@ require 'socket.io-client-simple'
 socket = SocketIO::Client::Simple.connect 'https://websocket.btcchina.com'
 
 socket.on :connect do
-  puts "connect!!!"
+  puts "connected!"
   socket.emit :subscribe, "marketdata_cnybtc"
   socket.emit :subscribe, "marketdata_cnyltc"
   socket.emit :subscribe, "marketdata_btcltc"
 end
 
 socket.on :disconnect do
-  puts "disconnected!!"
+  puts "disconnected!"
 end
 
 socket.on :trade do |data|
