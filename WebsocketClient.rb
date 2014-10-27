@@ -48,10 +48,14 @@ socket.on:connect do
   socket.emit :subscribe, "marketdata_cnybtc"
   socket.emit :subscribe, "marketdata_cnyltc"
   socket.emit :subscribe, "marketdata_btcltc"
+  socket.emit :subscribe, "grouporder_cnybtc"
+  socket.emit :subscribe, "grouporder_cnyltc"
+  socket.emit :subscribe, "grouporder_btcltc"
+  
   post_data = initial_post_data
   post_data['method'] = 'subscribe'
   post_data['params'] = ["order_cnybtc", "order_cnyltc", "order_btcltc", "account_info"]
-  payload = params_parse(post_data)G
+  payload = params_parse(post_data)
   pstr = params_string(payload.clone)
   signature_string = sign(pstr)
   socket.emit :private, [payload.to_json, signature_string]
@@ -72,6 +76,11 @@ end
 
 socket.on :ticker do |data|
  puts 'ticker:'
+ p data
+end
+
+socket.on :grouporder do |data|
+ puts 'grouporder:'
  p data
 end
 
