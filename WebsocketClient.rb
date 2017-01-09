@@ -47,14 +47,12 @@ socket.on:connect do
   puts "connected!"
   socket.emit :subscribe, "marketdata_cnybtc"
   socket.emit :subscribe, "marketdata_cnyltc"
-  socket.emit :subscribe, "marketdata_btcltc"
   socket.emit :subscribe, "grouporder_cnybtc"
   socket.emit :subscribe, "grouporder_cnyltc"
-  socket.emit :subscribe, "grouporder_btcltc"
   
   post_data = initial_post_data
   post_data['method'] = 'subscribe'
-  post_data['params'] = ["order_cnybtc", "order_cnyltc", "order_btcltc", "account_info"]
+  post_data['params'] = ["order_cnybtc", "order_cnyltc", "account_info"]
   payload = params_parse(post_data)
   pstr = params_string(payload.clone)
   signature_string = sign(pstr)
